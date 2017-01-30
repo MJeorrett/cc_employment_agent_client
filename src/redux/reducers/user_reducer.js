@@ -8,7 +8,7 @@ const user_reducer = ( state = defaultState, action ) => {
   switch ( action.type ) {
     case LOG_IN_USER:
       return {
-        logged_in_user: action.email
+        logged_in_user: action.payload.email
       }
     default:
       return state
