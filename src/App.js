@@ -1,14 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <h1>CC Employment Agent</h1>
-        { this.props.children }
-      </div>
-    )
-  }
+import user_reducer from './redux/reducers/user_reducer'
+
+import Main from './Main'
+import Welcome from './components/Welcome'
+import Employers from './components/Employers'
+
+const store = createStore( user_reducer )
+
+function App() {
+  return (
+    <Provider store={ store }>
+      <Router history={ browserHistory }>
+        <Route path="/" component={ Main } >
+          <IndexRoute component={ Welcome } />
+          <Route path="employers" component={ Employers } />
+        </Route>
+      </Router>
+    </Provider>
+  )
 }
 
 export default App
