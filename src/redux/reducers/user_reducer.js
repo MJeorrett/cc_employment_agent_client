@@ -1,14 +1,14 @@
-import { SET_LOGGED_IN_USER } from '../actions/types'
+import { LOG_IN_USER } from '../actions/types'
 
 const defaultState = {
-  logged_in_user: undefined
+  logged_in_user: null
 }
 
 const user_reducer = ( state = defaultState, action ) => {
   switch ( action.type ) {
-    case SET_LOGGED_IN_USER:
+    case LOG_IN_USER:
       return {
-        logged_in_user: action.user
+        logged_in_user: action.email
       }
     default:
       return state

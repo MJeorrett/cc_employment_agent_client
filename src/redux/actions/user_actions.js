@@ -1,8 +1,9 @@
-import { SET_LOGGED_IN_USER } from './types'
+import { LOG_IN_USER } from './types'
 
-export function setLoggedInUser( user ) {
+export function logInUser( email, password ) {
   return {
-    type: SET_LOGGED_IN_USER,
-    user
+    type: LOG_IN_USER,
+    email,
+    password
   }
 }

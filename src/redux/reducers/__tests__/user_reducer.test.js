@@ -1,5 +1,4 @@
-import * as types from '../../actions/types'
-import { setLoggedInUser } from '../../actions/user_actions'
+import { logInUser } from '../../actions/user_actions'
 import user_reducer from '../user_reducer'
 
 it('should return default state', () => {
@@ -7,17 +6,17 @@ it('should return default state', () => {
     user_reducer( undefined, {} )
   ).toEqual(
     {
-      current_user: undefined
+      logged_in_user: null
     }
   )
 })
 
-it('should set current user', () => {
+it('should log in user', () => {
   expect(
-    user_reducer( {}, setLoggedInUser( "test data" ) )
+    user_reducer( {}, logInUser( "test@email.com", "testPassword" ) )
   ).toEqual(
     {
-      logged_in_user: "test data"
+      logged_in_user: "test@email.com"
     }
   )
 })
