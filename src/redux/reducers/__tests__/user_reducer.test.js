@@ -1,4 +1,4 @@
-import { logInUser } from '../../actions/user_actions'
+import * as actions from '../../actions/user_actions'
 import user_reducer from '../user_reducer'
 
 it('should return default state', () => {
@@ -6,17 +6,49 @@ it('should return default state', () => {
     user_reducer( undefined, {} )
   ).toEqual(
     {
-      logged_in_user: null
+      logged_in_user: null,
+      log_in_in_progress: false,
+      log_in_error: ""
     }
   )
 })
 
-it('should log in user', () => {
+it('should start log in', () => {
   expect(
-    user_reducer( {}, logInUser( "test@email.com", "testPassword" ) )
+    user_reducer( {}, actions.logInUserStarted() )
   ).toEqual(
     {
-      logged_in_user: "test@email.com"
+      logged_in_user: null,
+      log_in_in_progress: true,
+      log_in_error: ""
+    }
+  )
+})
+
+it('should handle log in success', () => {
+  const mockUser = {
+    name: "test",
+    email: "test@test.com"
+  }
+  expect(
+    user_reducer( {}, actions.logInUserSuccess( mockUser ) )
+  ).toEqual(
+    {
+      logged_in_user: mockUser,
+      log_in_in_progress: false,
+      log_in_error: ""
+    }
+  )
+})
+
+it('should handle log in faliure', () => {
+  expect(
+    user_reducer( {}, actions.logInUserFailed( "test error" ) )
+  ).toEqual(
+    {
+      logged_in_user: null,
+      log_in_in_progress: false,
+      log_in_error: "test error"
     }
   )
 })

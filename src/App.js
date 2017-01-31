@@ -1,7 +1,8 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
 
 import user_reducer from './redux/reducers/user_reducer'
 
@@ -9,7 +10,12 @@ import Main from './Main'
 import Welcome from './components/Welcome'
 import Employers from './components/Employers'
 
-const store = createStore( user_reducer )
+const store = createStore(
+  user_reducer,
+  applyMiddleware(
+    thunkMiddleware
+  )
+)
 
 function App() {
   return (
