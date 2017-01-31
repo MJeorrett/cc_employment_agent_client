@@ -22,12 +22,15 @@ export function logInUserFailed( error ) {
   }
 }
 
-// function handleErrors(res) {
-//     if (!res.ok) {
-//         throw Error(res.json().then( json => json.error ));
-//     }
-//     return res;
-// }
+function handleErrors(res) {
+  const json = res.json()
+  if (!res.ok) {
+    return json.then( err => { throw err.error } )
+  }
+  else {
+    return json
+  }
+}
 
 export function logInUser( email, password ) {
   return function ( dispatch ) {
@@ -47,9 +50,8 @@ export function logInUser( email, password ) {
         'Access-Control-Allow-Credentials': 'true'
       }
     })
-    // .then( res => handleErrors(res) )
-    .then( res => res.json() )
-    .then( json => console.log("json:", json) )
-    // .catch( err => console.log("error:", err.message) )
+    .then( res => handleErrors(res) )
+    .then( json => dispatch( logInUserSuccess(json) ) )
+    .catch( err => dispatch( logInUserFailed(err) ) )
   }
 }
