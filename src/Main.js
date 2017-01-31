@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import LogInBoxContainer from './containers/LogInBoxContainer'
 
@@ -23,5 +24,11 @@ class Main extends Component {
     )
   }
 }
+
+const mapStateToProps = state => state
+
+Main = connect(
+  mapStateToProps
+)(Main)
 
 export default Main
