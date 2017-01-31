@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import LogInBoxContainer from './containers/LogInBoxContainer'
+import ToolbarContainer from './containers/ToolbarContainer'
 
 class Main extends Component {
 
@@ -9,6 +10,7 @@ class Main extends Component {
     if ( this.props.logged_in_user ) {
       return (
         <div>
+          <ToolbarContainer />
           { this.props.children }
         </div>
       )
