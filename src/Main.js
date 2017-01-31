@@ -4,22 +4,25 @@ import { connect } from 'react-redux'
 import LogInBoxContainer from './containers/LogInBoxContainer'
 
 class Main extends Component {
-  render() {
-    let contents
+
+  getContents() {
     if ( this.props.logged_in_user ) {
-      contents = (
+      return (
         <div>
           { this.props.children }
         </div>
       )
     }
     else {
-      contents = <LogInBoxContainer />
+      return <LogInBoxContainer />
     }
+  }
+
+  render() {
     return (
       <div>
         <h1>CC Employment Agent</h1>
-        { contents }
+        { this.getContents() }
       </div>
     )
   }
