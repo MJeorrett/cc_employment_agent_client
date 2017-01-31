@@ -26,6 +26,7 @@ class Login extends React.Component {
           <input type="password" ref={ node => password = node } />
           <button type="submit">Log in</button>
         </form>
+        <p>{ this.props.error }</p>
       </div>
     )
   }

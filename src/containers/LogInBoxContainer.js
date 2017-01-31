@@ -9,8 +9,7 @@ class LogInBoxContainer extends React.Component {
   render() {
     return (
       <div>
-        <LogInBox onLogIn={ this.props.logInUser }/>
-        <p>{ this.props.log_in_error.toString() }</p>
+        <LogInBox onLogIn={ this.props.logInUser } error={ this.props.log_in_error } />
       </div>
     )
   }
