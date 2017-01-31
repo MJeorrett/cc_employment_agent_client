@@ -25,6 +25,7 @@ export function logInUserFailed( error ) {
 function handleErrors(res) {
   const json = res.json()
   if (!res.ok) {
+    console.log("res not OK");
     return json.then( err => { throw err.error } )
   }
   else {
@@ -51,7 +52,9 @@ export function logInUser( email, password ) {
       }
     })
     .then( res => handleErrors(res) )
-    .then( json => dispatch( logInUserSuccess(json) ) )
-    .catch( err => dispatch( logInUserFailed(err) ) )
+    .then(
+      json => dispatch( logInUserSuccess(json) ),
+      err => dispatch( logInUserFailed(err) )
+    )
   }
 }
