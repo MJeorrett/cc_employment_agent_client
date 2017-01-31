@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
+import { logOutUser } from '../redux/actions/user_actions'
+
 class ToolbarContainer extends React.Component {
 
   render() {
@@ -19,7 +21,7 @@ class ToolbarContainer extends React.Component {
           Students
         </Link>
         <span id="user-name">{ this.props.user_name }</span>
-        <button>Log Out</button>
+        <button onClick={ () => this.props.logOutUser() }>Log Out</button>
       </nav>
     )
   }
@@ -27,9 +29,15 @@ class ToolbarContainer extends React.Component {
 }
 
 const mapStateToProps = state => state.user
+const mapDispatchToProps = dispatch => {
+  return {
+    logOutUser: () => dispatch( logOutUser() )
+  }
+}
 
 ToolbarContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ToolbarContainer)
 
 export default ToolbarContainer

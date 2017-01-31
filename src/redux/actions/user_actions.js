@@ -23,10 +23,15 @@ export function logInUserFailed( error ) {
   }
 }
 
+export function logOutUserSuccess() {
+  return {
+    type: types.LOG_OUT_USER_SUCCESS
+  }
+}
+
 function handleErrors(res) {
   const json = res.json()
   if (!res.ok) {
-    console.log("res not OK");
     return json.then( err => { throw err.error } )
   }
   else {
@@ -57,5 +62,19 @@ export function logInUser( email, password ) {
       json => dispatch( logInUserSuccess(json) ),
       err => dispatch( logInUserFailed(err) )
     )
+  }
+}
+
+export function logOutUser() {
+  return function ( dispatch ) {
+    const url = API_URL + 'users/sign_out.json'
+    return fetch( url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    })
+    .then( () => dispatch( logOutUserSuccess() ) )
   }
 }

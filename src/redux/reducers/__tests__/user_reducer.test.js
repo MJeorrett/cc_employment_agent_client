@@ -52,3 +52,23 @@ it('should handle log in faliure', () => {
     }
   )
 })
+
+it('should handle log out user success', () => {
+  const mockState = {
+    logged_in_user: {
+      name: "test name",
+      email: "test@test.com"
+    },
+    log_in_in_progress: false,
+    log_in_error: ""
+  }
+  expect(
+    user_reducer( mockState, actions.logOutUserSuccess() )
+  ).toEqual(
+    {
+      logged_in_user: null,
+      log_in_in_progress: false,
+      log_in_error: ""
+    }
+  )
+})

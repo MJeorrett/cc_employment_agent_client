@@ -26,6 +26,12 @@ const user_reducer = ( state = defaultState, action ) => {
         log_in_in_progress: false,
         log_in_error: action.payload
       }
+    case types.LOG_OUT_USER_SUCCESS:
+      return {
+        logged_in_user: null,
+        log_in_in_progress: false,
+        log_in_error: ""
+      }
     default:
       return state
   }
