@@ -8,7 +8,7 @@ import user_reducer from './redux/reducers/user_reducer'
 
 import Main from './Main'
 import Welcome from './components/Welcome'
-import Employers from './components/Employers'
+import EmployersContainer from './containers/EmployersContainer'
 
 const store = createStore(
   user_reducer,
@@ -23,7 +23,7 @@ function App() {
       <Router history={ browserHistory }>
         <Route path="/" component={ Main } >
           <IndexRoute component={ Welcome } />
-          <Route path="employers" component={ Employers } />
+          <Route path="employers" component={ EmployersContainer } />
         </Route>
       </Router>
     </Provider>
