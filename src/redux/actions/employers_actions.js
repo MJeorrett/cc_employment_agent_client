@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 import * as types from './types'
+import { API_URL } from '../../config'
 
 export function fetchEmployersStarted() {
   return {
@@ -25,7 +26,7 @@ export function fetchEmployersFailed( error ) {
 export function fetchEmployers() {
   return function ( dispatch ) {
     dispatch(fetchEmployersStarted() )
-    const url = 'http://localhost:5000/api/employers'
+    const url = API_URL + 'api/employers'
     return fetch( url, {
       method: 'GET',
       headers: {

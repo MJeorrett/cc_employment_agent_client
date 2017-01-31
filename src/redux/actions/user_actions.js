@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 import * as types from './types'
+import { API_URL } from '../../config'
 
 export function logInUserStarted() {
   return {
@@ -36,7 +37,7 @@ function handleErrors(res) {
 export function logInUser( email, password ) {
   return function ( dispatch ) {
     dispatch( logInUserStarted() )
-    const url = 'http://localhost:5000/users/sign_in.json'
+    const url = API_URL + 'users/sign_in.json'
     const reqBody = {
       user: {
         email,
