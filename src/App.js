@@ -4,14 +4,14 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
-import user_reducer from './redux/reducers/user_reducer'
+import root_reducer from './redux/reducers'
 
 import Main from './Main'
 import Welcome from './components/Welcome'
 import EmployersContainer from './containers/EmployersContainer'
 
 const store = createStore(
-  user_reducer,
+  root_reducer,
   applyMiddleware(
     thunkMiddleware
   )

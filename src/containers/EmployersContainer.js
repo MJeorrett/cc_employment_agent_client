@@ -9,14 +9,14 @@ class EmployersContainer extends React.Component{
   }
 
   render() {
-    return <p>{ this.props.employers }</p>
+    return <p>{ JSON.stringify( this.props.employers ) }</p>
   }
 }
 
 const mapStateToProps = state => {
-  if ( state.employer_ids ) {
-    const employers = state.employer_ids.map( employerId => {
-      return state.employers[employerId]
+  if ( state.employers.employer_ids ) {
+    const employers = state.employers.employer_ids.map( employerId => {
+      return state.employers.employers[employerId]
     })
     return { employers }
   }

@@ -16,7 +16,7 @@ class LogInBoxContainer extends React.Component {
 
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => state.user
 const mapDispatchToProps = dispatch => {
   return {
     logInUser: ( email, password) => {
