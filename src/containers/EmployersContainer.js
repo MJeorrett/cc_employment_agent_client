@@ -5,7 +5,6 @@ import { fetchEmployers } from '../redux/actions/employers_actions'
 class EmployersContainer extends React.Component{
 
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchEmployers()
   }
 
