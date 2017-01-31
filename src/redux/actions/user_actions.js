@@ -47,9 +47,9 @@ export function logInUser( email, password ) {
       method: 'POST',
       body: JSON.stringify( reqBody ),
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': 'true'
-      }
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
     })
     .then( res => handleErrors(res) )
     .then(

@@ -29,9 +29,9 @@ export function fetchEmployers() {
     return fetch( url, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': 'true'
-      }
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
     })
     .then( res => res.json() )
     .then( json => dispatch( fetchEmployersSuccess(json) ) )
