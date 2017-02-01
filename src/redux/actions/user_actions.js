@@ -65,6 +65,37 @@ export function logInUser( email, password ) {
   }
 }
 
+function fetchCurrentUser( dispatch ) {
+  const url = API_URL + 'users'
+  return fetch( url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  })
+  .then( res => res.json() )
+  .then( json => dispatch( logInUserSuccess(json) ) )
+}
+
+export function getLoggedInUser() {
+  return function ( dispatch ) {
+    dispatch( logInUserStarted() )
+    const url = API_URL + 'authtest'
+    return fetch( url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    })
+    .then( res => res.json() )
+    .then( json => {
+      if ( json ) fetchCurrentUser( dispatch )
+    })
+  }
+}
+
 export function logOutUser() {
   return function ( dispatch ) {
     const url = API_URL + 'users/sign_out.json'

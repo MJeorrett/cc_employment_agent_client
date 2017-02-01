@@ -3,8 +3,13 @@ import { connect } from 'react-redux'
 
 import LogInBoxContainer from './containers/LogInBoxContainer'
 import ToolbarContainer from './containers/ToolbarContainer'
+import { getLoggedInUser } from './redux/actions/user_actions'
 
 class Main extends Component {
+
+  componentDidMount() {
+    this.props.getLoggedInUser()
+  }
 
   getContents() {
     if ( this.props.logged_in_user ) {
@@ -31,9 +36,15 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => state.user
+const mapDispatchToProps = dispatch => {
+  return {
+    getLoggedInUser: () => dispatch( getLoggedInUser() )
+  }
+}
 
 Main = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Main)
 
 export default Main
