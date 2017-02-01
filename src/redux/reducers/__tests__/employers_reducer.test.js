@@ -8,7 +8,8 @@ it('should return default state', () => {
     {
       fetching_in_progress: false,
       employers: {},
-      employer_ids: []
+      employer_ids: [],
+      selected_employer_id: null
     }
   )
 })
@@ -17,7 +18,8 @@ it('should handle fetch employers started', () => {
   const mockState = {
     fetching_in_progress: false,
     employers: {e1 : 'employer1'},
-    employer_ids: ['e1']
+    employer_ids: ['e1'],
+    selected_employer_id: "should stay the same"
   }
   expect(
     employers_reducer( mockState, actions.fetchEmployersStarted() )
@@ -25,12 +27,19 @@ it('should handle fetch employers started', () => {
     {
       fetching_in_progress: true,
       employers: {e1 : 'employer1'},
-      employer_ids: ['e1']
+      employer_ids: ['e1'],
+      selected_employer_id: "should stay the same"
     }
   )
 })
 
 it('should handle fetch employers success', () => {
+  const mockState = {
+    fetching_in_progress: true,
+    employers: "old data should be overwritten",
+    employer_ids: "old data shold be overwritten",
+    selected_employer_id: "old data should be overwritten"
+  }
   const mockPayload = [
     {
       id: 1,
@@ -42,7 +51,7 @@ it('should handle fetch employers success', () => {
     }
   ]
   expect(
-    employers_reducer( {}, actions.fetchEmployersSuccess(mockPayload) )
+    employers_reducer( mockState, actions.fetchEmployersSuccess(mockPayload) )
   ).toEqual(
     {
       fetching_in_progress: false,
@@ -56,9 +65,27 @@ it('should handle fetch employers success', () => {
           name: 'employer2'
         }
       },
-      employer_ids: ['e1', 'e2']
+      employer_ids: ['e1', 'e2'],
+      selected_employer_id: null
     }
   )
+})
+
+it('should handle select employer', () => {
+  const mockState = {
+    fetching_in_progress: " fetching_in_progress should remain unchanged",
+    employers: "employers should remain unchanged",
+    employer_ids: "employer_ids should remain unchanged",
+    selected_employer_id: null
+  }
+  expect(
+    employers_reducer( mockState, actions.selectEmployer(3) )
+  ).toEqual({
+    fetching_in_progress: " fetching_in_progress should remain unchanged",
+    employers: "employers should remain unchanged",
+    employer_ids: "employer_ids should remain unchanged",
+    selected_employer_id: 'e3'
+  })
 })
 
 it('should handle reorder employer', () => {

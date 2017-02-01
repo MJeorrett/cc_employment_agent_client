@@ -33,6 +33,13 @@ export function reorderEmployer( fromIndex, toIndex ) {
   }
 }
 
+export function selectEmployer( id ) {
+  return {
+    type: types.EMPLOYER_SELECTED,
+    payload: id
+  }
+}
+
 export function fetchEmployers() {
   return function ( dispatch ) {
     dispatch(fetchEmployersStarted() )

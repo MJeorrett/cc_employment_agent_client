@@ -3,7 +3,8 @@ import * as types from '../actions/types'
 const defaultState = {
   fetching_in_progress: false,
   employers: {},
-  employer_ids: []
+  employer_ids: [],
+  selected_employer_id: null
 }
 
 const employers_reducer = ( state = defaultState, action ) => {
@@ -20,11 +21,16 @@ const employers_reducer = ( state = defaultState, action ) => {
         employers[id] = employer
         employerIds.push(id)
       })
-      return {
+      return Object.assign( {}, state, {
         fetching_in_progress: false,
         employers: employers,
-        employer_ids: employerIds
-      }
+        employer_ids: employerIds,
+        selected_employer_id: null
+      })
+    case types.EMPLOYER_SELECTED:
+      return Object.assign( {}, state, {
+        selected_employer_id: 'e' + action.payload
+      })
     case types.REORDER_EMPLOYER:
       const employer_ids = state.employer_ids.slice(0)
       const fromIndex = state.employer_ids.indexOf( 'e' + action.payload.fromIndex )
