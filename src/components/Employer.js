@@ -1,11 +1,13 @@
 import React from 'react'
 
-const Employer = ({ logoUrl, companyName }) => {
+const Employer = ({ item }) => {
   return (
-    <img
-      src={ logoUrl }
-      alt={ companyName }
-      className="employer"/>
+    <div>
+      <img
+        src={ item.company_logo_url }
+        alt={ item.company_name }
+        className="employer"/>
+    </div>
   )
 }
 

@@ -23,6 +23,16 @@ export function fetchEmployersFailed( error ) {
   }
 }
 
+export function reorderEmployer( fromIndex, toIndex ) {
+  return {
+    type: types.REORDER_EMPLOYER,
+    payload: {
+      fromIndex: fromIndex,
+      toIndex: toIndex
+    }
+  }
+}
+
 export function fetchEmployers() {
   return function ( dispatch ) {
     dispatch(fetchEmployersStarted() )

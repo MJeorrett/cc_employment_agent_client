@@ -61,4 +61,49 @@ it('should handle fetch employers success', () => {
   )
 })
 
-
+it('should handle reorder employer', () => {
+  const mockState = {
+    employers: "should remain unchanged",
+    employer_ids: [ 'e3', 'e2', 'e1', 'e4' ]
+  }
+  expect(
+    employers_reducer( mockState, actions.reorderEmployer( 1, 2 ) )
+  ).toEqual(
+    {
+      employers: "should remain unchanged",
+      employer_ids: [ 'e3', 'e1', 'e2', 'e4' ]
+    }
+  )
+  expect(
+    employers_reducer( mockState, actions.reorderEmployer( 1, 4 ) )
+  ).toEqual(
+    {
+      employers: "should remain unchanged",
+      employer_ids: [ 'e3', 'e2', 'e4', 'e1' ]
+    }
+  )
+  expect(
+    employers_reducer( mockState, actions.reorderEmployer( 1, 1 ) )
+  ).toEqual(
+    {
+      employers: "should remain unchanged",
+      employer_ids: [ 'e3', 'e2', 'e1', 'e4' ]
+    }
+  )
+  expect(
+    employers_reducer( mockState, actions.reorderEmployer( 2, 1 ) )
+  ).toEqual(
+    {
+      employers: "should remain unchanged",
+      employer_ids: [ 'e3', 'e1', 'e2', 'e4' ]
+    }
+  )
+  expect(
+    employers_reducer( mockState, actions.reorderEmployer( 3, 4 ) )
+  ).toEqual(
+    {
+      employers: "should remain unchanged",
+      employer_ids: [ 'e2', 'e1', 'e4', 'e3' ]
+    }
+  )
+})

@@ -15,7 +15,7 @@ const employers_reducer = ( state = defaultState, action ) => {
     case types.FETCH_EMPLOYERS_SUCCESS:
       const employers = {}
       const employerIds = []
-      action.payload.forEach( employer => { 
+      action.payload.forEach( employer => {
         const id = 'e' + employer.id
         employers[id] = employer
         employerIds.push(id)
@@ -23,8 +23,16 @@ const employers_reducer = ( state = defaultState, action ) => {
       return {
         fetching_in_progress: false,
         employers: employers,
-        employer_ids: employerIds 
+        employer_ids: employerIds
       }
+    case types.REORDER_EMPLOYER:
+      const employer_ids = state.employer_ids.slice(0)
+      const fromIndex = state.employer_ids.indexOf( 'e' + action.payload.fromIndex )
+      const toIndex = state.employer_ids.indexOf( 'e' + action.payload.toIndex )
+      employer_ids.splice(toIndex, 0, employer_ids.splice(fromIndex, 1)[0])
+      return Object.assign( {}, state, {
+        employer_ids
+      })
     default:
       return state
   }

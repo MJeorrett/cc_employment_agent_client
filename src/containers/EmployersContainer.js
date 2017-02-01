@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { fetchEmployers } from '../redux/actions/employers_actions'
+import { fetchEmployers, reorderEmployer } from '../redux/actions/employers_actions'
+import AbsoluteGrid from 'react-absolute-grid'
 
 import Employer from '../components/Employer'
 
@@ -10,20 +11,16 @@ class EmployersContainer extends React.Component{
     this.props.fetchEmployers()
   }
 
-  createEmployers() {
-    return this.props.employers.map( (employer, index) => {
-      return (
-        <Employer
-          key={ index }
-          companyName={ employer.company_name }
-          logoUrl={ employer.company_logo_url } />
-      )
-    })
-  }
-
   render() {
-    const employers = this.createEmployers()
-    return <div>{ employers }</div>
+    return (
+      <AbsoluteGrid
+        items={ this.props.employers }
+        displayObject={ <Employer /> }
+        keyProp='id'
+        itemWidth={ 300 }
+        dragEnabled={ true }
+        onMove={ this.props.reorderEmployer }/>
+    )
   }
 }
 
@@ -32,7 +29,10 @@ const mapStateToProps = state => {
     const employers = state.employers.employer_ids.map( employerId => {
       return state.employers.employers[employerId]
     })
-    return { employers }
+    return {
+      employers,
+      employer_ids: state.employers.employer_ids
+    }
   }
   else {
     return { employers: null }
@@ -41,7 +41,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchEmployers: () => dispatch( fetchEmployers() )
+    fetchEmployers: () => dispatch( fetchEmployers() ),
+    reorderEmployer: (fromIndex, toIndex) => {
+      dispatch( reorderEmployer( fromIndex, toIndex) )
+    }
   }
 }
 
