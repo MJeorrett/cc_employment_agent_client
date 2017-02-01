@@ -5,6 +5,7 @@ import AbsoluteGrid from 'react-absolute-grid'
 import SkyLight from 'react-skylight'
 
 import Employer from '../components/Employer'
+import EmployerPreview from '../components/EmployerPreview'
 
 class EmployersContainer extends React.Component{
 
@@ -36,7 +37,7 @@ class EmployersContainer extends React.Component{
           hideOnOverlayClicked
           ref="simpleDialog"
           title={ this.props.selectedEmployer.company_name }>
-          { JSON.stringify( this.props.selectedEmployer) }
+          { <EmployerPreview employer={ this.props.selectedEmployer } /> }
         </SkyLight>
       </div>
     )
