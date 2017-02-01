@@ -2,14 +2,28 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { fetchEmployers } from '../redux/actions/employers_actions'
 
+import Employer from '../components/Employer'
+
 class EmployersContainer extends React.Component{
 
   componentDidMount() {
     this.props.fetchEmployers()
   }
 
+  createEmployers() {
+    return this.props.employers.map( (employer, index) => {
+      return (
+        <Employer
+          key={ index }
+          companyName={ employer.company_name }
+          logoUrl={ employer.company_logo_url } />
+      )
+    })
+  }
+
   render() {
-    return <p>{ JSON.stringify( this.props.employers ) }</p>
+    const employers = this.createEmployers()
+    return <div>{ employers }</div>
   }
 }
 

@@ -1,0 +1,12 @@
+img.employer {
+  height: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 30px 0px;
+  background-position: center;
+}
+
+img.employer:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
